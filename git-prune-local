@@ -7,8 +7,15 @@ do
     # branch
     BRANCH=`echo "$line" | awk -F '*' '{ print $1 }'`
 
-    if [ -n "$BRANCH" ]
+    if [ -z "$BRANCH" ]
     then
-        git branch -d "$BRANCH"
+        continue
     fi
+
+    if [ "$BRANCH" == "master" ]
+    then
+        continue
+    fi
+
+    git branch -d "$BRANCH"
 done
