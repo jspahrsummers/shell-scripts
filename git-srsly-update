@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -o errexit
+
+git fetch -p --recurse-submodules
+git rebase
+
+if [ -e "./script/bootstrap" ]
+then
+    ./script/bootstrap
+else
+    git submodule sync --recursive
+    git submodule update --init --recursive
+fi
